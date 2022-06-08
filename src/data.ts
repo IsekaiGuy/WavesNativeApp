@@ -1,5 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
 
+export interface ISong {
+    name: string,
+    cover: string,
+    artist: string,
+    audio: string,
+    color: string[],
+    id: string,
+    active: boolean
+}
+
 export default [
     {
       name: "Canary Forest",

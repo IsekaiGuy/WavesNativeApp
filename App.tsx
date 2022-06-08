@@ -11,14 +11,14 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (<NavigationContainer>
           <Drawer.Navigator
-              drawerContent={() => <LibraryScreen/>}
+              drawerContent={(props) => <LibraryScreen {...props}/>}
               initialRouteName="Home"
               screenOptions={({ navigation }) => ({
-                  headerLeft: props =>
+                  headerLeft: () =>
                       <MaterialIcons
                           name="library-music"
                           size={26}
-                          color='rgba(221, 231, 243, 0.55)'
+                          color='whitesmoke'
                           style={styles.icon}
                           onPress={navigation.toggleDrawer}
                       />,
@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
         textShadowRadius: 1
     },
     background: {
-        backgroundColor: 'rgba(221, 231, 243, 0.55)'
-    }
+        backgroundColor: 'rgba(212, 224, 237, 1)'
+    },
 })

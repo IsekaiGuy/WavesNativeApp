@@ -3,8 +3,8 @@ import {View, Text, StyleSheet, FlatList, Image} from "react-native";
 import songs from "../data";
 import {DrawerItem} from "@react-navigation/drawer";
 
-const LibraryScreen = () => {
-    return (<>
+const LibraryScreen = ({navigation}:any) => {
+    return (<View style={styles.screen}>
         <DrawerItem
             labelStyle={styles.title}
             label='Library'
@@ -12,6 +12,7 @@ const LibraryScreen = () => {
         />
         <FlatList
             keyExtractor={(song) => song.id}
+            showsVerticalScrollIndicator={false}
             data={songs}
             renderItem={({item}) => {
                 return ( <DrawerItem
@@ -32,14 +33,18 @@ const LibraryScreen = () => {
                             resizeMode="contain"
                         />
                     )}
-                    onPress={() => console.log('Pressed')}
+                    onPress={() => navigation.navigate('Home', {id: item.id})}
                 />)
             }}
         />
-    </>)
+    </View>)
 }
 
 const styles = StyleSheet.create({
+    screen: {
+      flex: 1,
+      backgroundColor: 'rgba(221, 231, 243, 1)',
+    },
     container: {
         marginVertical: 20
     },
@@ -61,7 +66,7 @@ const styles = StyleSheet.create({
     image: {
         width: 50,
         height: 50,
-        borderRadius: 5
+        borderRadius: 5,
     }
 })
 
