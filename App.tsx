@@ -1,20 +1,62 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import HomeScreen from "./src/Screens/HomeScreen";
+import LibraryScreen from "./src/Screens/LibraryScreen";
+import { MaterialIcons } from '@expo/vector-icons';
+import {StyleSheet} from "react-native";
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return (<NavigationContainer>
+          <Drawer.Navigator
+              drawerContent={() => <LibraryScreen/>}
+              initialRouteName="Home"
+              screenOptions={({ navigation }) => ({
+                  headerLeft: props =>
+                      <MaterialIcons
+                          name="library-music"
+                          size={26}
+                          color='rgba(221, 231, 243, 0.55)'
+                          style={styles.icon}
+                          onPress={navigation.toggleDrawer}
+                      />,
+                  headerTitleAlign: 'center',
+                  headerStyle: {
+                      ...styles.background
+                  },
+                  headerTitleStyle: {
+                      ...styles.headerTitle
+                  },
+              })}
+          >
+              <Drawer.Screen
+                  name="Home"
+                  component={HomeScreen}
+                  options={{ title: 'Waves' }}
+              />
+          </Drawer.Navigator>
+        </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    headerTitle: {
+        fontSize: 26,
+        color: 'whitesmoke',
+        textShadowColor: 'rgb(99, 99, 99)',
+        textShadowOffset: {width: 1, height: 1},
+        fontWeight: '700',
+        textShadowRadius: 3
+    },
+    icon: {
+        marginLeft: 20,
+        textShadowColor: 'grey',
+        textShadowOffset: {width: 1, height: 1},
+        textShadowRadius: 1
+    },
+    background: {
+        backgroundColor: 'rgba(221, 231, 243, 0.55)'
+    }
+})
