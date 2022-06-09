@@ -1,72 +1,65 @@
 export interface ISong {
-  name: string;
-  cover: string;
+  title: string;
+  artwork: string;
   artist: string;
-  audio: string;
+  url: string;
   color: string[];
   id: string;
-  active: boolean;
 }
 
 export default [
   {
-    name: 'Canary Forest',
-    cover:
+    title: 'Canary Forest',
+    artwork:
       'https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg',
     artist: 'Aso, Middle School, Aviino',
-    audio: 'https://mp3.chillhop.com/serve.php/?mp3=10075',
+    url: 'https://mp3.chillhop.com/serve.php/?mp3=10075',
     color: ['#205950', '#2ab3bf'],
     id: '1',
-    active: true,
   },
   {
-    name: 'Daylight',
-    cover:
+    title: 'Daylight',
+    artwork:
       'https://chillhop.com/wp-content/uploads/2020/07/ef95e219a44869318b7806e9f0f794a1f9c451e4-1024x1024.jpg',
     artist: 'Aiguille',
-    audio: 'https://mp3.chillhop.com/serve.php/?mp3=9272',
+    url: 'https://mp3.chillhop.com/serve.php/?mp3=9272',
     color: ['#EF8EA9', '#ab417f'],
     id: '2',
-    active: false,
   },
   {
-    name: 'Keep Going',
-    cover:
+    title: 'Keep Going',
+    artwork:
       'https://chillhop.com/wp-content/uploads/2020/07/ff35dede32321a8aa0953809812941bcf8a6bd35-1024x1024.jpg',
     artist: 'Swørn',
-    audio: 'https://mp3.chillhop.com/serve.php/?mp3=9222',
+    url: 'https://mp3.chillhop.com/serve.php/?mp3=9222',
     color: ['#CD607D', '#c94043'],
     id: '3',
-    active: false,
   },
   {
-    name: 'Nightfall',
-    cover:
+    title: 'Nightfall',
+    artwork:
       'https://chillhop.com/wp-content/uploads/2020/07/ef95e219a44869318b7806e9f0f794a1f9c451e4-1024x1024.jpg',
     artist: 'Aiguille',
-    audio: 'https://mp3.chillhop.com/serve.php/?mp3=9148',
+    url: 'https://mp3.chillhop.com/serve.php/?mp3=9148',
     color: ['#EF8EA9', '#ab417f'],
     id: '4',
-    active: false,
   },
   {
-    name: 'Reflection',
-    cover:
+    title: 'Reflection',
+    artwork:
       'https://chillhop.com/wp-content/uploads/2020/07/ff35dede32321a8aa0953809812941bcf8a6bd35-1024x1024.jpg',
     artist: 'Swørn',
-    audio: 'https://mp3.chillhop.com/serve.php/?mp3=9228',
+    url: 'https://mp3.chillhop.com/serve.php/?mp3=9228',
     color: ['#CD607D', '#c94043'],
     id: '5',
-    active: false,
   },
   {
-    name: 'Under the City Stars',
-    cover:
+    title: 'Under the City Stars',
+    artwork:
       'https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg',
     artist: 'Aso, Middle School, Aviino',
-    audio: 'https://mp3.chillhop.com/serve.php/?mp3=10074',
+    url: 'https://mp3.chillhop.com/serve.php/?mp3=10074',
     color: ['#205950', '#2ab3bf'],
     id: '6',
-    active: false,
   },
 ];

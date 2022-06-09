@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Slider from '@react-native-community/slider';
 import Icon from './Icon';
 import {Shadow} from 'react-native-shadow-2';
-import TrackPlayer, {RepeatMode} from 'react-native-track-player';
+import songs from '../data';
+import TrackPlayer, {
+  RepeatMode,
+  Capability,
+  Event,
+  State,
+  useProgress,
+  usePlaybackState,
+  useTrackPlayerEvents,
+} from 'react-native-track-player';
 
 interface IPlayer {
   audio: string;
@@ -11,8 +20,26 @@ interface IPlayer {
   skipTrackHandler: (direction: string) => Promise<void>;
 }
 
+const setupPlayer = async () => {
+  await TrackPlayer.setupPlayer();
+
+  await TrackPlayer.add(songs);
+};
+
+const togglePlayback = async (playbackState: any) => {
+  const currentTrack = await TrackPlayer.getCurrentTrack();
+
+  if (currentTrack !== null) {
+    if (playbackState === State.Paused) {
+      await TrackPlayer.play();
+    } else {
+      await TrackPlayer.pause();
+    }
+  }
+};
+
 const Player = (props: IPlayer) => {
-  console.log(TrackPlayer);
+  const playbackState = usePlaybackState();
 
   const styles = StyleSheet.create({
     container: {
@@ -58,6 +85,10 @@ const Player = (props: IPlayer) => {
     },
   });
 
+  useEffect(() => {
+    setupPlayer();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Slider
@@ -76,7 +107,11 @@ const Player = (props: IPlayer) => {
       </View>
 
       <View style={styles.controls}>
-        <TouchableOpacity onPress={() => props.skipTrackHandler('skip-back')}>
+        <TouchableOpacity
+          onPress={async () => {
+            await props.skipTrackHandler('skip-back');
+            await TrackPlayer.skipToPrevious();
+          }}>
           <Shadow
             distance={5}
             startColor={props.color[0]}
@@ -92,7 +127,7 @@ const Player = (props: IPlayer) => {
             </View>
           </Shadow>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => togglePlayback(playbackState)}>
           <Shadow
             distance={5}
             startColor={props.color[0]}
@@ -101,7 +136,7 @@ const Player = (props: IPlayer) => {
             <View style={styles.playButtonWrapper}>
               <Icon
                 fill={props.color[0]}
-                name="Play"
+                name={playbackState === State.Playing ? 'Pause' : 'Play'}
                 style={styles.button}
                 viewBox="4 4 40 40"
               />
@@ -109,7 +144,10 @@ const Player = (props: IPlayer) => {
           </Shadow>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => props.skipTrackHandler('skip-forward')}>
+          onPress={async () => {
+            await props.skipTrackHandler('skip-forward');
+            await TrackPlayer.skipToNext();
+          }}>
           <Shadow
             distance={5}
             startColor={props.color[0]}

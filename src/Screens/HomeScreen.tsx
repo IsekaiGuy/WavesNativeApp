@@ -74,13 +74,16 @@ const HomeScreen = (props: any) => {
     <View style={styles.background}>
       <View>
         <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{uri: `${currentSong.cover}`}} />
+          <Image
+            style={styles.image}
+            source={{uri: `${currentSong.artwork}`}}
+          />
         </View>
-        <Text style={styles.name}>{currentSong.name}</Text>
+        <Text style={styles.name}>{currentSong.title}</Text>
         <Text style={styles.artist}>{currentSong.artist}</Text>
       </View>
       <Player
-        audio={currentSong.audio}
+        audio={currentSong.url}
         color={currentSong.color}
         skipTrackHandler={skipTrackHandler}
       />

@@ -21,14 +21,14 @@ const LibraryScreen = ({navigation}: any) => {
             <DrawerItem
               label={() => (
                 <View style={styles.container}>
-                  <Text style={styles.song}>{item.name}</Text>
+                  <Text style={styles.song}>{item.title}</Text>
                   <Text>{item.artist}</Text>
                 </View>
               )}
               icon={() => (
                 <Image
                   style={styles.image}
-                  source={{uri: `${item.cover}`}}
+                  source={{uri: `${item.artwork}`}}
                   resizeMode="contain"
                 />
               )}
