@@ -1,16 +1,15 @@
 import React, {useEffect} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Slider from '@react-native-community/slider';
 import Icon from './Icon';
 import {Shadow} from 'react-native-shadow-2';
 import songs from '../data';
 import TrackPlayer, {
   RepeatMode,
-  Capability,
-  Event,
   State,
-  useProgress,
+  Event,
   usePlaybackState,
+  useProgress,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
 
@@ -18,6 +17,7 @@ interface IPlayer {
   audio: string;
   color: string[];
   skipTrackHandler: (direction: string) => Promise<void>;
+  setCurrentSong: (track: any) => void;
 }
 
 const setupPlayer = async () => {
@@ -40,6 +40,15 @@ const togglePlayback = async (playbackState: any) => {
 
 const Player = (props: IPlayer) => {
   const playbackState = usePlaybackState();
+  const progress = useProgress();
+
+  useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
+    if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
+      const track = await TrackPlayer.getTrack(event.nextTrack);
+
+      await props.setCurrentSong(track);
+    }
+  });
 
   const styles = StyleSheet.create({
     container: {
@@ -87,23 +96,33 @@ const Player = (props: IPlayer) => {
 
   useEffect(() => {
     setupPlayer();
+    TrackPlayer.setRepeatMode(RepeatMode.Off);
   }, []);
 
   return (
     <View style={styles.container}>
       <Slider
         style={styles.progressBar}
+        value={progress.position}
         minimumValue={0}
-        maximumValue={1}
+        maximumValue={progress.duration}
         thumbTintColor={props.color[0]}
         minimumTrackTintColor={props.color[0]}
         maximumTrackTintColor={props.color[1]}
-        onSlidingComplete={() => {}}
+        onSlidingComplete={async value => {
+          await TrackPlayer.seekTo(value);
+        }}
       />
 
       <View style={styles.durationData}>
-        <Text>0:00</Text>
-        <Text>3:55</Text>
+        <Text>
+          {new Date(progress.position * 1000).toISOString().slice(14, 19)}
+        </Text>
+        <Text>
+          {new Date((progress.duration - progress.position) * 1000)
+            .toISOString()
+            .slice(14, 19)}
+        </Text>
       </View>
 
       <View style={styles.controls}>

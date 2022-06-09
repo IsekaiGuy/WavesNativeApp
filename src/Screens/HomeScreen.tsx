@@ -86,10 +86,10 @@ const HomeScreen = (props: any) => {
         audio={currentSong.url}
         color={currentSong.color}
         skipTrackHandler={skipTrackHandler}
+        setCurrentSong={setCurrentSong}
       />
     </View>
   );
 };
 
 export default HomeScreen;
-//   colors={['rgba(221, 231, 243, 1)', 'rgba(212, 224, 237, 1)']}>
