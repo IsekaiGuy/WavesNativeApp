@@ -83,8 +83,7 @@ const HomeScreen = (props: any) => {
         <Text style={styles.artist}>{currentSong.artist}</Text>
       </View>
       <Player
-        audio={currentSong.url}
-        color={currentSong.color}
+        currentSong={currentSong}
         skipTrackHandler={skipTrackHandler}
         setCurrentSong={setCurrentSong}
       />

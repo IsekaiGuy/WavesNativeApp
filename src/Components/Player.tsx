@@ -3,7 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Slider from '@react-native-community/slider';
 import Icon from './Icon';
 import {Shadow} from 'react-native-shadow-2';
-import songs from '../data';
+import songs, {ISong} from '../data';
 import TrackPlayer, {
   RepeatMode,
   State,
@@ -14,8 +14,7 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 
 interface IPlayer {
-  audio: string;
-  color: string[];
+  currentSong: ISong;
   skipTrackHandler: (direction: string) => Promise<void>;
   setCurrentSong: (track: any) => void;
 }
@@ -42,6 +41,13 @@ const Player = (props: IPlayer) => {
   const playbackState = usePlaybackState();
   const progress = useProgress();
 
+  useEffect(() => {
+    const track = TrackPlayer.getCurrentTrack();
+    if (+props.currentSong.id !== +track) {
+      TrackPlayer.skip(+props.currentSong.id);
+    }
+  }, [props.currentSong.id]);
+
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
       const track = await TrackPlayer.getTrack(event.nextTrack);
@@ -57,7 +63,7 @@ const Player = (props: IPlayer) => {
     button: {
       padding: 30,
       borderRadius: 50,
-      color: `${props.color[0]}`,
+      color: `${props.currentSong.color[0]}`,
       shadowColor: 'grey',
       shadowRadius: 1,
       shadowOffset: {width: 10, height: 1},
@@ -106,9 +112,9 @@ const Player = (props: IPlayer) => {
         value={progress.position}
         minimumValue={0}
         maximumValue={progress.duration}
-        thumbTintColor={props.color[0]}
-        minimumTrackTintColor={props.color[0]}
-        maximumTrackTintColor={props.color[1]}
+        thumbTintColor={props.currentSong.color[0]}
+        minimumTrackTintColor={props.currentSong.color[0]}
+        maximumTrackTintColor={props.currentSong.color[1]}
         onSlidingComplete={async value => {
           await TrackPlayer.seekTo(value);
         }}
@@ -133,12 +139,12 @@ const Player = (props: IPlayer) => {
           }}>
           <Shadow
             distance={5}
-            startColor={props.color[0]}
+            startColor={props.currentSong.color[0]}
             radius={50}
             containerViewStyle={{opacity: 0.7}}>
             <View style={styles.buttonWrapper}>
               <Icon
-                fill={props.color[0]}
+                fill={props.currentSong.color[0]}
                 name="Previous"
                 style={styles.button}
                 viewBox="-10 -10 70 70"
@@ -149,12 +155,12 @@ const Player = (props: IPlayer) => {
         <TouchableOpacity onPress={() => togglePlayback(playbackState)}>
           <Shadow
             distance={5}
-            startColor={props.color[0]}
+            startColor={props.currentSong.color[0]}
             radius={50}
             containerViewStyle={{opacity: 0.7}}>
             <View style={styles.playButtonWrapper}>
               <Icon
-                fill={props.color[0]}
+                fill={props.currentSong.color[0]}
                 name={playbackState === State.Playing ? 'Pause' : 'Play'}
                 style={styles.button}
                 viewBox="4 4 40 40"
@@ -169,12 +175,12 @@ const Player = (props: IPlayer) => {
           }}>
           <Shadow
             distance={5}
-            startColor={props.color[0]}
+            startColor={props.currentSong.color[0]}
             radius={50}
             containerViewStyle={{opacity: 0.7}}>
             <View style={styles.buttonWrapper}>
               <Icon
-                fill={props.color[0]}
+                fill={props.currentSong.color[0]}
                 name="Next"
                 style={styles.button}
                 viewBox="-10 -10 70 70"

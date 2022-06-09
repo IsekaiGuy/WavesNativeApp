@@ -15,7 +15,7 @@ export default [
     artist: 'Aso, Middle School, Aviino',
     url: 'https://mp3.chillhop.com/serve.php/?mp3=10075',
     color: ['#205950', '#2ab3bf'],
-    id: '1',
+    id: '0',
   },
   {
     title: 'Daylight',
@@ -24,7 +24,7 @@ export default [
     artist: 'Aiguille',
     url: 'https://mp3.chillhop.com/serve.php/?mp3=9272',
     color: ['#EF8EA9', '#ab417f'],
-    id: '2',
+    id: '1',
   },
   {
     title: 'Keep Going',
@@ -33,7 +33,7 @@ export default [
     artist: 'Swørn',
     url: 'https://mp3.chillhop.com/serve.php/?mp3=9222',
     color: ['#CD607D', '#c94043'],
-    id: '3',
+    id: '2',
   },
   {
     title: 'Nightfall',
@@ -42,7 +42,7 @@ export default [
     artist: 'Aiguille',
     url: 'https://mp3.chillhop.com/serve.php/?mp3=9148',
     color: ['#EF8EA9', '#ab417f'],
-    id: '4',
+    id: '3',
   },
   {
     title: 'Reflection',
@@ -51,7 +51,7 @@ export default [
     artist: 'Swørn',
     url: 'https://mp3.chillhop.com/serve.php/?mp3=9228',
     color: ['#CD607D', '#c94043'],
-    id: '5',
+    id: '4',
   },
   {
     title: 'Under the City Stars',
@@ -60,6 +60,6 @@ export default [
     artist: 'Aso, Middle School, Aviino',
     url: 'https://mp3.chillhop.com/serve.php/?mp3=10074',
     color: ['#205950', '#2ab3bf'],
-    id: '6',
+    id: '5',
   },
 ];

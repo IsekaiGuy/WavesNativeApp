@@ -8,6 +8,8 @@ const LibraryScreen = ({navigation}: any) => {
   return (
     <View style={styles.screen}>
       <DrawerItem
+        pressColor={'rgba(221, 231, 243, 1)'}
+        pressOpacity={1}
         labelStyle={styles.title}
         label="Library"
         onPress={() => null}
