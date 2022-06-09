@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/WavesApp.iml" filepath="$PROJECT_DIR$/.idea/WavesApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AwesomeTSProject.iml" filepath="$PROJECT_DIR$/.idea/AwesomeTSProject.iml" />
     </modules>
   </component>
 </project>
